@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<mapper namespace="kr.rs.member.mapper.MemberMapper">
+
+	<select id="getUser" resultType="MemberDTO">
+		SELECT * FROM member WHERE id = #{userid}
+	</select>
+	
+	<select id="checkUser" resultType="int">
+		SELECT count(*) FROM member WHERE id = #{userid}
+	</select>
+	
+	<select id="getUserList" resultType="MemberDTO">
+		SELECT * FROM member
+	</select>
+	
+	<insert id="insertUser">
+		INSERT INTO member VALUES(#{id}, #{pw}, #{name}, sysdate)
+	</insert>
+	
+	<update id="updateUser">
+		UPDATE member 
+		<set>
+			<if test="user.pw != null">pw = #{user.pw},</if>
+			<if test="user.name != null">name = #{user.name}</if>
+		</set>
+		WHERE id = #{userid}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM member WHERE id = #{userid}
+	</delete>
+</mapper>
