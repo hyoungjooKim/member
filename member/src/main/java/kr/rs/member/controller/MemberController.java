@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.rs.member.component.MemberDTO;
 import kr.rs.member.service.MemberService;
 
+@RequestMapping("/users")
 @RestController
 public class MemberController {
 	@Autowired
@@ -23,7 +24,7 @@ public class MemberController {
 	
 	// Search from {userid}'s information
 	// @RequestMapping("/users/{userid}")
-	@RequestMapping(value = "/users/{userid}", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/{userid}", produces = "application/json; charset=utf-8")
 	public MemberDTO getUser(@PathVariable String userid) {
 		MemberDTO user = Service.getUser(userid);
 		System.out.println(userid+"의 정보 확인");
@@ -32,7 +33,7 @@ public class MemberController {
 	
 	// Search from All user's information
 	// @GetMapping("/users")
-	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public List<MemberDTO> allUser(){
 		List<MemberDTO> userList = Service.getUserList();
 		System.out.println("전체 테이터베이스 정보 확인");
@@ -41,7 +42,7 @@ public class MemberController {
 	
 	// Insert information into Oracle DB
 	// @PostMapping("/users")
-	@RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public String insert(@RequestBody MemberDTO user) {
 		String result = "";
 		
@@ -60,7 +61,7 @@ public class MemberController {
 	
 	// modify information where {userid} is exist
 	// @PatchMapping("/users/{userid}")
-	@RequestMapping(value = "/users/{userid}", method = RequestMethod.PATCH, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/{userid}", method = RequestMethod.PATCH, produces = "application/json; charset=utf-8")
 	public String update(@RequestBody MemberDTO user,@PathVariable String userid) {
 		String result = "";
 		int usercheck = Service.checkUser(userid);
@@ -77,7 +78,7 @@ public class MemberController {
 	
 	// Delete information where {userid} is exist
 	// @DeleteMapping("/users/{userid}")
-	@RequestMapping(value = "/users/{userid}", method = RequestMethod.DELETE, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/{userid}", method = RequestMethod.DELETE, produces = "application/json; charset=utf-8")
 	public String delete(@PathVariable String userid) {
 		String result = "";
 		int usercheck = Service.checkUser(userid);
