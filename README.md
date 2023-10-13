@@ -1,2 +1,2 @@
 # member
-spring rest api [SPRING 3]
+spring rest api [SPRING Framework]
